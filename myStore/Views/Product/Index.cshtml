@@ -1,0 +1,17 @@
+﻿@model IQueryable<myStore.Domain.Entities.Product>
+
+@{
+    ViewBag.Title = "Product Catalogue";
+}
+
+<h2>Product Catalogue</h2>
+
+<ul>
+@foreach (var product in Model)
+{
+    <li>
+        <h3>@product.Name</h3>
+        <p>@product.Description</p>
+    </li>    
+}
+</ul>

@@ -111,6 +111,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\myStore.Domain\myStore.Domain.csproj">
+      <Project>{c5741c67-9d09-4e90-8517-45a068d8bfd1}</Project>
+      <Name>myStore.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\myStore\myStore.csproj">
       <Project>{61F8D617-BC68-4D93-B0AF-74B70F967A89}</Project>
       <Name>myStore</Name>

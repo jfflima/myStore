@@ -1,6 +1,8 @@
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc4;
+using myStore.Domain.Abstract;
+using myStore.Domain.Concrete;
 
 namespace myStore
 {
@@ -19,10 +21,6 @@ namespace myStore
     {
       var container = new UnityContainer();
 
-      // register all your components with the container here
-      // it is NOT necessary to register your controllers
-
-      // e.g. container.RegisterType<ITestService, TestService>();    
       RegisterTypes(container);
 
       return container;
@@ -30,7 +28,7 @@ namespace myStore
 
     public static void RegisterTypes(IUnityContainer container)
     {
-    
+        container.RegisterType<IProductRepository, ProductRepository>(); 
     }
   }
 }
