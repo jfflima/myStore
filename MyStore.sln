@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Web
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "myStore", "myStore\myStore.csproj", "{61F8D617-BC68-4D93-B0AF-74B70F967A89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "myStore.Tests", "myStore.Tests\myStore.Tests.csproj", "{70CB967C-6FDC-448B-99A8-B59F210613DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61F8D617-BC68-4D93-B0AF-74B70F967A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F8D617-BC68-4D93-B0AF-74B70F967A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F8D617-BC68-4D93-B0AF-74B70F967A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F8D617-BC68-4D93-B0AF-74B70F967A89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70CB967C-6FDC-448B-99A8-B59F210613DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70CB967C-6FDC-448B-99A8-B59F210613DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70CB967C-6FDC-448B-99A8-B59F210613DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70CB967C-6FDC-448B-99A8-B59F210613DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+EndGlobal
