@@ -13,23 +13,44 @@ namespace myStore.Tests
     [TestClass]
     public class ProductControllerTests
     {
+        List<Product> productList = new List<Product>()
+        {
+            new Product { Id = new Guid(), Name = "Product 1", Description = "Product 1 Description" },
+            new Product { Id = new Guid(), Name = "Product 3", Description = "Product 3 Description" },
+            new Product { Id = new Guid(), Name = "Product 2", Description = "Product 2 Description" },
+            new Product { Id = new Guid(), Name = "Product 5", Description = "Product 5 Description" },
+            new Product { Id = new Guid(), Name = "Product 4", Description = "Product 4 Description" },
+            new Product { Id = new Guid(), Name = "Product 6", Description = "Product 6 Description" },
+        };
+
+        Mock<IProductRepository> GetProductMockRepository()
+        {
+            var mockRepository = new Mock<IProductRepository>();
+            mockRepository.Setup(m => m.Products).Returns(productList.AsQueryable());
+            return mockRepository;
+        }
+
         [TestMethod]
         public void should_be_able_to_see_list_of_all_products()
         {
-            var product = new Product { Id = new Guid(), Name = "Product 1", Description = "Product 1 Description" };
-            var mockRepository = new Mock<IProductRepository>();
-            mockRepository.Setup(m => m.Products).Returns(new List<Product>{ product }.AsQueryable());
+            var mockRepository = GetProductMockRepository();
 
             var result = (IQueryable<Product>)((ViewResult)new ProductController(mockRepository.Object).Index()).Model;
 
-            Assert.AreEqual(1, result.Count(), "Expected product count 1");
-            Assert.AreEqual(product.Id, result.First().Id, "Expected same product id");
+            Assert.AreEqual(productList.Count, result.Count());
+            Assert.AreEqual(productList[0].Id, result.First().Id);
+            Assert.AreEqual(productList[5].Id, result.Last().Id);
         }
+                
 
         [TestMethod]
         public void should_be_able_to_see_product_details()
         {
-            throw new NotImplementedException();
+            var mockRepository = GetProductMockRepository();
+
+            var result = (Product)((ViewResult)new ProductController(mockRepository.Object).Detail(productList[0].Id)).Model;
+
+            Assert.AreEqual(productList[0], result);
         }
 
         [TestMethod]

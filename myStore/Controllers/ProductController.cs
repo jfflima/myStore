@@ -20,5 +20,10 @@ namespace myStore.Controllers
         {
             return View(repository.Products);
         }
+
+        public ViewResult Detail(Guid productId)
+        {
+            return View(repository.Products.First(p => p.Id == productId));
+        }
     }
 }
