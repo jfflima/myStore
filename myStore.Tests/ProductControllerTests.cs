@@ -23,10 +23,12 @@ namespace myStore.Tests
             new Product { Id = new Guid(), Name = "Product 6", Description = "Product 6 Description" },
         };
 
-        Mock<IProductRepository> GetProductMockRepository()
+        Mock<IProductRepository> GetProductMockRepository(List<Product> products = null)
         {
             var mockRepository = new Mock<IProductRepository>();
-            mockRepository.Setup(m => m.Products).Returns(productList.AsQueryable());
+            var list = products ?? productList;
+            mockRepository.Setup(m => m.Products).Returns(list.AsQueryable());
+            mockRepository.Setup(m => m.Add(It.IsAny<Product>())).Callback((Product p) => { list.Add(p); });
             return mockRepository;
         }
 
@@ -56,13 +58,28 @@ namespace myStore.Tests
         [TestMethod]
         public void should_be_able_to_add_a_valid_product()
         {
-            throw new NotImplementedException();
+            var products = new List<Product>();
+            var mockRepository = GetProductMockRepository(products);
+            var newProduct = new Product { Id = Guid.NewGuid(), Name = "New Product", Description = "New Product Description"};
+            
+            var result = (RedirectToRouteResult)new ProductController(mockRepository.Object).Add(newProduct);
+
+            Assert.AreEqual(1, products.Count);
+            Assert.AreEqual(newProduct.Id, products[0].Id);
         }
 
         [TestMethod]
         public void should_not_be_able_to_add_a_invalid_product()
         {
-            throw new NotImplementedException();
+            var products = new List<Product>();
+            var mockRepository = GetProductMockRepository(products);
+            var newProduct = new Product { Id = Guid.NewGuid(), Name = "", Description = "" };
+            var controller = new ProductController(mockRepository.Object);
+            controller.ModelState.AddModelError("Error", new ArgumentException("Error"));
+
+            var result = (ViewResult)controller.Add(newProduct);
+
+            Assert.AreEqual(0, products.Count);
         }
 
         [TestMethod]

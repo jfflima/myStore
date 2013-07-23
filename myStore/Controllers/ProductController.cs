@@ -25,5 +25,23 @@ namespace myStore.Controllers
         {
             return View(repository.Products.First(p => p.Id == productId));
         }
+
+        public ViewResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add(Domain.Entities.Product newProduct)
+        {
+            if (ModelState.IsValid)
+            {
+                newProduct.Id = Guid.NewGuid();
+                repository.Add(newProduct);
+                return RedirectToAction("Index");
+            }
+
+            return View(newProduct);
+        }
     }
 }

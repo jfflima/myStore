@@ -1,4 +1,5 @@
 ﻿using myStore.Domain.Abstract;
+using myStore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,18 @@ namespace myStore.Domain.Concrete
     {
         MyStoreDbContext context = new MyStoreDbContext();
 
-        public IQueryable<Entities.Product> Products
+        public IQueryable<Product> Products
         {
             get
             {
                 return context.Products;
             }
+        }
+
+        public void Add(Product product)
+        {
+            context.Products.Add(product);
+            context.SaveChanges();
         }
     }
 }

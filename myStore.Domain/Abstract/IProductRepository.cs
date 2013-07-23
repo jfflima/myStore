@@ -10,5 +10,6 @@ namespace myStore.Domain.Abstract
     public interface IProductRepository
     {
         IQueryable<Product> Products { get; }
+        void Add(Product product);
     }
 }
